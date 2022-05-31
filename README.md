@@ -3,10 +3,6 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/static/v1?label=NLW&message=06&color=8257E5&labelColor=000000" alt="NLW Together 06" />
-  
-  <img src="https://img.shields.io/github/stars/rocketseat-education/nlw-06-reactjs?label=stars&message=MIT&color=8257E5&labelColor=000000" alt="Stars">
-
   <img  src="https://img.shields.io/static/v1?label=license&message=MIT&color=8257E5&labelColor=000000" alt="License">   
 </p>
 
@@ -30,7 +26,7 @@ $ cd pandemia
 
 ## 💻 Projeto
 
-Pandemia aborda temas muito presentes no dia a dia, tanto na áreas do entretenimento, como na saúde, por exemplo. A Gameplay tem como motivação relembrar os jogadores de jogos que fizeram parte de sua infância.
+Pandemia aborda temas muito presentes no dia a dia, tanto nas áreas do entretenimento, como na saúde, por exemplo. A Gameplay tem como motivação relembrar os jogadores de jogos que fizeram parte de sua infância.
 
 Este é um projeto desenvolvido durante o Trabalho de Conclusão de Curso (TCC), para o Curso de Ciência da Computação.
 
