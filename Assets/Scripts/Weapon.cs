@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            // Shoot();
+            Shoot();
         }
     }
 
