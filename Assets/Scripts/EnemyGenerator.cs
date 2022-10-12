@@ -76,7 +76,7 @@ public class EnemyGenerator : MonoBehaviour
     {
         Vector3 position = Random.insideUnitSphere * distanceGeneration;
         position += transform.position;
-        position.y = 0;
+        position.x = 0;
 
         return position;
     }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "390045447503",
+    "project_id": "playpandemiagame",
+    "storage_bucket": "playpandemiagame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390045447503:android:586d4e9a75c8ebe25a813a",
+        "android_client_info": {
+          "package_name": "io.idleapps.pandemia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390045447503-6riabajrm67oitpm7mj1vflc8poflgrl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4s-48TslPEdcZKedk3y3Jqc3wtzc9wfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390045447503-6riabajrm67oitpm7mj1vflc8poflgrl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
