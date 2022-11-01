@@ -249,6 +249,8 @@ MonoBehaviour:
   health: 8
   speed: 2.5
   attackDistance: 10
+  civilian: {fileID: 6935210623103380015, guid: 3a58ac67c0367594c8d7a441067d6bca,
+    type: 3}
   coin: {fileID: 6837695188961476957, guid: 61c13d3190b12264d8043483bdd1377f, type: 3}
   medicKit: {fileID: 7684724716644711770, guid: 2226676d7660bb447b3af5ee6fcd545d,
     type: 3}

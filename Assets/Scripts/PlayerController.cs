@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,15 +20,18 @@ public class PlayerController : MonoBehaviour
 
     public Joystick joystick;
 
+    public GameObject gameOverText;
     private int health;
     private int maxHealth;
-    private float fireRate = 0.5f;
     private bool tookDamage = false;
 
     GameManager gameManager;
 
+    public UIManager uIManager;
+
     void Start()
     {
+        Time.timeScale = 1;
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         gameManager = GameManager.gameManager;
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-        Jump();
+        // Jump();
     }
 
     void Move()
@@ -101,7 +103,17 @@ public class PlayerController : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Enemy") && !tookDamage)
         {
-            StartCoroutine(TookDamage());
+            StartCoroutine(TookDamage(1));
+        }
+
+        if(collision.gameObject.CompareTag("InfectedArea") && !tookDamage)
+        {
+            StartCoroutine(TookDamage(20));
+        }
+
+        if(collision.gameObject.CompareTag("Coin"))
+        {
+            uIManager.ManageCoins();
         }
 
         // if(collision.gameObject.CompareTag("Support"))
@@ -120,7 +132,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetPlayerStatus()
     {
-        fireRate = gameManager.fireRate;
+        Weapon weapon = GetComponent<Weapon>();
+        weapon.fireRate = gameManager.fireRate;
         maxHealth = gameManager.health;
     }
 
@@ -133,21 +146,23 @@ public class PlayerController : MonoBehaviour
     {
         if(other.CompareTag("Enemy") && !tookDamage)
         {
-            StartCoroutine(TookDamage());
+            StartCoroutine(TookDamage(1));
         }
     }
 
-    IEnumerator TookDamage()
+    IEnumerator TookDamage(int damage)
     {
         tookDamage = true;
-        health --;
+        health -= damage;
         Instantiate(damageParticle, transform.position, transform.rotation);
         AudioController.audioInstance.PlayOneShot(damageSound);
         UpdateHealthUI();
         if(health <= 0)
         {
             isDead = true;
-            Invoke("ReloadScene", 2f);
+            uIManager.GameOver();
+            // gameOverText.SetActive(true);
+            // Invoke("ReloadScene", 2f);
         }
         else
         {
@@ -172,10 +187,5 @@ public class PlayerController : MonoBehaviour
             health = maxHealth;
         }
         UpdateHealthUI();
-    }
-
-    void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

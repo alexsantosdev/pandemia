@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int health = 5;
+    public int health = 10;
     public int damage = 1;
     public float fireRate = 0.5f;
     public float reloadTime = 1f;
     public int coins;
+    public int curedEnemies;
     public int upgradeCost = 20;
 
     public static GameManager gameManager;

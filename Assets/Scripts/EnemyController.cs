@@ -7,13 +7,15 @@ public class EnemyController : MonoBehaviour
     public int health;
     public float speed;
     public float attackDistance;
+    public GameObject civilian;
     public GameObject coin;
     public GameObject medicKit;
     public GameObject virusParticle;
     public AudioClip cureSound;
+    private UIManager uIManager;
 
     private float medicKitGenerationPercentage = 0.1f;
-    private float virusCoinGenerationPercentage = 0.1f;
+    private float virusCoinGenerationPercentage = 0.6f;
 
     protected Animator anim;
     protected bool facingRight = true;
@@ -33,6 +35,8 @@ public class EnemyController : MonoBehaviour
         // boxCollider = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         Physics2D.IgnoreLayerCollision(10, 12);
+        // int generateEnemyType = Random.Range(0, 2);
+        uIManager = GameObject.FindObjectOfType(typeof(UIManager)) as UIManager;
     }
 
     // Update is called once per frame
@@ -68,10 +72,12 @@ public class EnemyController : MonoBehaviour
         this.enabled = false;
         // rigidBody.isKinematic = true;
         // boxCollider.enabled = false;
-        Destroy(gameObject, 1f);
+        Instantiate(civilian, transform.position, transform.rotation);
+        Destroy(gameObject);
         BeCuredAnimation();
         VerifyVirusCoinGeneration(virusCoinGenerationPercentage);
         VerifyMedicKitGeneration(medicKitGenerationPercentage);
+        uIManager.UpdateCuredEnemiesQuantity();
     }
 
     public void VirusParticle()
