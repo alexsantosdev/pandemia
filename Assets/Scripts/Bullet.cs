@@ -5,15 +5,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 20f;
-    public int damage = 1;
     public Rigidbody2D rb;
-    public float destroyTime = 1.5f;
+    public float destroyTime = 2f;
+
+    GameManager gameManager;
 
     void Start()
     {
+        Physics2D.IgnoreLayerCollision(11, 12);
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed;
         Destroy(gameObject, destroyTime);
+        gameManager = GameManager.gameManager;
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
@@ -23,7 +26,7 @@ public class Bullet : MonoBehaviour
         Enemy otherEnemy = hitInfo.GetComponent<Enemy>();
         if(otherEnemy != null)
         {
-            otherEnemy.TookDamage(damage);
+            otherEnemy.TookDamage(gameManager.damage);
         }
 
     }

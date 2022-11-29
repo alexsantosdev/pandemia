@@ -9,10 +9,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] enemiesPrefab;
     [SerializeField]
-    private float enemyGeneratorTime = 1f;
+    private float enemyGeneratorTime = 1.5f;
 
     private GameObject player;
-    private int maximumAliveEnemies = 3;
+    private int maximumAliveEnemies = 12;
     private int aliveEnemiesCount;
     private float playerDistanceForGeneration = 10f;
     private float timerCount = 0;
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         difficultyIncreaseCounter = nearTimeToIncreaseDifficulty;
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < 1; i++)
         {
             StartCoroutine(spawnEnemy(enemiesPrefab[0], spawnPoints[0]));
         }
@@ -45,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
             if(timerCount >= enemyGeneratorTime)
             {
                 StartCoroutine(spawnEnemy(enemiesPrefab[radomEnemy], spawnPoints[randomPoint]));
+                // Invoke("spawnEnemy(enemiesPrefab[radomEnemy], spawnPoints[randomPoint])", enemyGeneratorTime);
                 timerCount = 0;
             }
         }

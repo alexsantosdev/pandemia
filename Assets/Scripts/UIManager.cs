@@ -9,7 +9,9 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI enemyText;
     public TextMeshProUGUI virusCoinText;
+    public TextMeshProUGUI timerText;
     public Slider healthBar;
+    public GameObject pausePanel;
     public GameObject tutorialPanel;
     public GameObject gameOverPanel;
     public TextMeshProUGUI aliveTimeText;
@@ -29,6 +31,13 @@ public class UIManager : MonoBehaviour
         GameManager.gameManager.coins = PlayerPrefs.GetInt("coin");
         UpdateVirusCoins();
         savedPoint = PlayerPrefs.GetFloat("maxPoint");
+    }
+
+    void Update()
+    {
+        int minutes = (int)(Time.timeSinceLevelLoad / 60);
+        int seconds = (int)(Time.timeSinceLevelLoad % 60);
+        timerText.text = string.Format("{0}:{1}", minutes, seconds);
     }
 
     public void UpdateHealth(int health)
@@ -76,6 +85,26 @@ public class UIManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("firstTime", 1);
         ManageTutorial();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+
+        int minutes = (int)(Time.timeSinceLevelLoad / 60);
+        int seconds = (int)(Time.timeSinceLevelLoad % 60);
+
+        aliveTimeText.text = minutes.ToString() + "min e " + seconds.ToString() + "s";
+
+        AdjustMaxPoint(minutes, seconds);
+
+        pausePanel.SetActive(true);
+    }
+
+    public void ManagePause()
+    {
+        Time.timeScale = 1;
+        pausePanel.SetActive(false);
     }
 
     public void GameOver()

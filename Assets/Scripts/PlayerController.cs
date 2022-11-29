@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     public AudioClip damageSound;
 
     public GameObject damageParticle;
+    public GameObject shield;
 
     public bool isJumping;
     public bool isDead;
+    public bool isProtected;
     private Rigidbody2D rigidBody;
 
     private Animator animator;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+        ManageProtection();
         // Jump();
     }
 
@@ -108,7 +111,9 @@ public class PlayerController : MonoBehaviour
 
         if(collision.gameObject.CompareTag("InfectedArea") && !tookDamage)
         {
-            StartCoroutine(TookDamage(20));
+            health = 0;
+            isDead = true;
+            uIManager.GameOver();
         }
 
         if(collision.gameObject.CompareTag("Coin"))
@@ -150,32 +155,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void ManageProtection()
+    {
+        Invoke("NoShield", GameManager.gameManager.shieldTime);
+    }
+
+    void NoShield()
+    {
+        isProtected = false;
+        shield.SetActive(false);
+    }
+
     IEnumerator TookDamage(int damage)
     {
-        tookDamage = true;
-        health -= damage;
-        Instantiate(damageParticle, transform.position, transform.rotation);
-        AudioController.audioInstance.PlayOneShot(damageSound);
-        UpdateHealthUI();
-        if(health <= 0)
+        if(!isProtected)
         {
-            isDead = true;
-            uIManager.GameOver();
-            // gameOverText.SetActive(true);
-            // Invoke("ReloadScene", 2f);
-        }
-        else
-        {
-            Physics2D.IgnoreLayerCollision(9, 10);
-            for (float i = 0; i < damageTime; i += 0.2f)
+            tookDamage = true;
+            health -= damage;
+            Instantiate(damageParticle, transform.position, transform.rotation);
+            AudioController.audioInstance.PlayOneShot(damageSound);
+            UpdateHealthUI();
+            if(health <= 0)
             {
-                GetComponent<SpriteRenderer>().enabled = false;
-                yield return new WaitForSeconds(0.1f);
-                GetComponent<SpriteRenderer>().enabled = true;
-                yield return new WaitForSeconds(0.1f);
+                isDead = true;
+                uIManager.GameOver();
+                // gameOverText.SetActive(true);
+                // Invoke("ReloadScene", 2f);
             }
-            Physics2D.IgnoreLayerCollision(9, 10, false);
-            tookDamage = false;
+            else
+            {
+                Physics2D.IgnoreLayerCollision(9, 10);
+                for (float i = 0; i < damageTime; i += 0.2f)
+                {
+                    GetComponent<SpriteRenderer>().enabled = false;
+                    yield return new WaitForSeconds(0.1f);
+                    GetComponent<SpriteRenderer>().enabled = true;
+                    yield return new WaitForSeconds(0.1f);
+                }
+                Physics2D.IgnoreLayerCollision(9, 10, false);
+                tookDamage = false;
+            }
         }
     }
 

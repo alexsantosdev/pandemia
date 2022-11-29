@@ -7,8 +7,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bullet;
     public AudioClip fireSound;
-    public float fireRate = 0.5f;
-    private float nextFire;
+    public float fireRate;
 
     // Update is called once per frame
     void Update()
@@ -21,12 +20,12 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        if(Time.time > nextFire)
-        {
-            nextFire = Time.time + fireRate;
+        // if(Time.time > nextFire)
+        // {
+            // nextFire = Time.time + fireRate;
             Instantiate(bullet, firePoint.position, firePoint.rotation);
             AudioController.audioInstance.PlayOneShot(fireSound);
-        }
+        // }
         
         // RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right);
     }

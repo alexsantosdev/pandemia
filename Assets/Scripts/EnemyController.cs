@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
-    public int health;
+    public float health;
+    private int initialHealth = 5;
     public float speed;
     public float attackDistance;
     public GameObject civilian;
@@ -23,6 +25,7 @@ public class EnemyController : MonoBehaviour
     protected float targetDistance;
     protected Rigidbody2D rigidBody;
     protected SpriteRenderer sprite;
+    public Slider sliderEnemy;
 
     // protected BoxCollider2D boxCollider;
 
@@ -39,15 +42,22 @@ public class EnemyController : MonoBehaviour
         uIManager = GameObject.FindObjectOfType(typeof(UIManager)) as UIManager;
     }
 
+    void Start()
+    {
+        sliderEnemy.maxValue = initialHealth;
+        UpdateInterface();
+    }
+
     // Update is called once per frame
     protected virtual void Update()
     {
         targetDistance = transform.position.x - target.position.x;
     }
 
-    public void TookDamage(int damage) 
+    public void TookDamage(float damage) 
     {
-        health = health - damage;
+        health -= damage;
+
         if(health <= 0)
         {
             BeCured();
@@ -55,6 +65,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             StartCoroutine(TookDamageCoRoutine());
+            UpdateInterface();
         }
     }
 
@@ -109,5 +120,10 @@ public class EnemyController : MonoBehaviour
     public void BeCuredAnimation()
     {
         anim.SetTrigger("cured");
+    }
+
+    void UpdateInterface()
+    {
+        sliderEnemy.value = health;
     }
 }

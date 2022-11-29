@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6837695188961476959}
   - component: {fileID: 6837695188961476958}
   - component: {fileID: 2095086217459941220}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VirusCoin
   m_TagString: Coin
   m_Icon: {fileID: 0}

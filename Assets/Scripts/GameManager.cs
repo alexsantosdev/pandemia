@@ -5,12 +5,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int health = 10;
-    public int damage = 1;
-    public float fireRate = 0.5f;
-    public float reloadTime = 1f;
+    public float damage = 1f;
+    public float fireRate = 0.2f;
+    public float shieldTime = 10f;
     public int coins;
     public int curedEnemies;
-    public int upgradeCost = 20;
+    public int simpleUpgradeCost = 5;
+    public int upgradeCost = 10;
+    public int maxPointToNextStage = 20;
 
     public static GameManager gameManager;
 
@@ -27,6 +29,26 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        if(PlayerPrefs.GetInt("simpleCost") != 0)
+        {
+            simpleUpgradeCost = PlayerPrefs.GetInt("simpleCost");
+        }
+
+        if(PlayerPrefs.GetInt("cost") != 0)
+        {
+            upgradeCost = PlayerPrefs.GetInt("cost");
+        }
+
+        if(PlayerPrefs.GetFloat("damage") != 0f)
+        {
+            damage = PlayerPrefs.GetFloat("damage");
+        }
+
+        if(PlayerPrefs.GetFloat("shieldTime") != 0f)
+        {
+            shieldTime = PlayerPrefs.GetFloat("shieldTime");
+        }
     }
 
     // Update is called once per frame
