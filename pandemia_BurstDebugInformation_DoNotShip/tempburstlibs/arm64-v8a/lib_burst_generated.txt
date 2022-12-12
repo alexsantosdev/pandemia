@@ -102,8 +102,8 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_UNITYADS_RUNTIME
 --compilation-defines=UNITY_UNITYADS_API
 --compilation-defines=ENABLE_MONO
---compilation-defines=NET_STANDARD_2_0
---compilation-defines=NET_STANDARD
+--compilation-defines=NET_4_6
+--compilation-defines=NET_UNITY_4_8
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
 --compilation-defines=ENABLE_LOCALIZATION

@@ -89,6 +89,8 @@ public class EnemyController : MonoBehaviour
         VerifyVirusCoinGeneration(virusCoinGenerationPercentage);
         VerifyMedicKitGeneration(medicKitGenerationPercentage);
         uIManager.UpdateCuredEnemiesQuantity();
+        EnemySpawner enemySpawner =  GameObject.FindObjectOfType(typeof(EnemySpawner)) as EnemySpawner;
+        enemySpawner.ReduceAliveEnemiesCount();
     }
 
     public void VirusParticle()
@@ -124,6 +126,6 @@ public class EnemyController : MonoBehaviour
 
     void UpdateInterface()
     {
-        sliderEnemy.value = health;
+        // sliderEnemy.value = health;
     }
 }

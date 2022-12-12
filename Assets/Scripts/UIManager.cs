@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public Slider healthBar;
     public GameObject pausePanel;
+    public GameObject objective1Check;
+    public GameObject objective2Check;
     public GameObject tutorialPanel;
     public GameObject gameOverPanel;
     public TextMeshProUGUI aliveTimeText;
@@ -65,6 +67,7 @@ public class UIManager : MonoBehaviour
     public void UpdateCuredEnemiesQuantity()
     {
         GameManager.gameManager.curedEnemies += 1;
+        PlayerPrefs.SetInt("maxEnemiesCured", GameManager.gameManager.curedEnemies);
         enemyText.text = GameManager.gameManager.curedEnemies.ToString();
     }
 
@@ -72,12 +75,12 @@ public class UIManager : MonoBehaviour
     {
         int firstTime = PlayerPrefs.GetInt("firstTime");
         if(firstTime == 0) {
-            tutorialPanel.SetActive(true);
             Time.timeScale = 0;
+            tutorialPanel.SetActive(true);
         }else {
+            Time.timeScale = 1;
             tutorialPanel.SetActive(false);
             PlayerPrefs.SetInt("firstTime", 1);
-            Time.timeScale = 1;
         }
     }
 
@@ -99,12 +102,32 @@ public class UIManager : MonoBehaviour
         AdjustMaxPoint(minutes, seconds);
 
         pausePanel.SetActive(true);
+
+        int aliveTime = (int) (Time.timeSinceLevelLoad / 60);
+
+        if(PlayerPrefs.GetInt("maxEnemiesCured") >= 40 || PlayerPrefs.GetInt("objective2") == 1)
+        {
+            objective2Check.SetActive(true);
+            PlayerPrefs.SetInt("objective2", 1);
+        }
+
+        if(aliveTime >= 3 || PlayerPrefs.GetInt("objective1") == 1)
+        {
+            objective1Check.SetActive(true);
+            PlayerPrefs.SetInt("objective1", 1);
+        }
     }
 
     public void ManagePause()
     {
         Time.timeScale = 1;
         pausePanel.SetActive(false);
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("main");
     }
 
     public void GameOver()
@@ -142,6 +165,13 @@ public class UIManager : MonoBehaviour
 
     public void ReloadScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if(PlayerPrefs.GetInt("objective1") == 1 && PlayerPrefs.GetInt("objective2") == 1)
+        {
+            SceneManager.LoadScene("game1");
+        }
+        else
+        {
+            SceneManager.LoadScene("game");
+        }
     }
 }

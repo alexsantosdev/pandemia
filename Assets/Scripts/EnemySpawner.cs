@@ -12,9 +12,9 @@ public class EnemySpawner : MonoBehaviour
     private float enemyGeneratorTime = 1.5f;
 
     private GameObject player;
-    private int maximumAliveEnemies = 12;
+    private int maximumAliveEnemies = 15;
     private int aliveEnemiesCount;
-    private float playerDistanceForGeneration = 10f;
+    private float playerDistanceForGeneration = 6.6f;
     private float timerCount = 0;
     private float nearTimeToIncreaseDifficulty = 8f;
     private float difficultyIncreaseCounter;
@@ -67,6 +67,6 @@ public class EnemySpawner : MonoBehaviour
 
     public void ReduceAliveEnemiesCount()
     {
-        aliveEnemiesCount--;
+        aliveEnemiesCount -= 1;
     }
 }

@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public int curedEnemies;
     public int simpleUpgradeCost = 5;
     public int upgradeCost = 10;
-    public int maxPointToNextStage = 20;
+    public int maxPointToNextStage = 40;
+    public float maxTimeToNextStage = 3f;
 
     public static GameManager gameManager;
 

@@ -329,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   speed: 2
-  attackDistance: 8
+  attackDistance: 10
   civilian: {fileID: 1087530374445785806, guid: f94dd37b96a256e4fa7429c6c7f4c453,
     type: 3}
   coin: {fileID: 6837695188961476957, guid: 61c13d3190b12264d8043483bdd1377f, type: 3}
