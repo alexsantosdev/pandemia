@@ -9050,9 +9050,37 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MenuController_PlayGame_m357DFFA71ABAF1B
 	if (!s_Il2CppMethodInitialized)
 	{
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SceneManager_tA0EF56A88ACA4A15731AF7FDC10A869FA4C698FA_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral411587B124082D36F378C3A79B97DDDB86FC6963);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral7AA85CFCC1B14978AFCF12FABD54D2AC74400E8B);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralA15635DBC8C5541F49FA3FBDBB71F91FC2DC1FAC);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralEFFD35C65E33A877C6A1ED7BACA14AA546C00ECF);
 		s_Il2CppMethodInitialized = true;
 	}
+	{
+		// if(PlayerPrefs.GetInt("objective1") == 1 && PlayerPrefs.GetInt("objective2") == 1)
+		int32_t L_0;
+		L_0 = PlayerPrefs_GetInt_m35C13A87BBC7907554CE5405EB5D00CF85E7457B(_stringLiteral411587B124082D36F378C3A79B97DDDB86FC6963, NULL);
+		if ((!(((uint32_t)L_0) == ((uint32_t)1))))
+		{
+			goto IL_0025;
+		}
+	}
+	{
+		int32_t L_1;
+		L_1 = PlayerPrefs_GetInt_m35C13A87BBC7907554CE5405EB5D00CF85E7457B(_stringLiteralA15635DBC8C5541F49FA3FBDBB71F91FC2DC1FAC, NULL);
+		if ((!(((uint32_t)L_1) == ((uint32_t)1))))
+		{
+			goto IL_0025;
+		}
+	}
+	{
+		// SceneManager.LoadScene("game1");
+		il2cpp_codegen_runtime_class_init_inline(SceneManager_tA0EF56A88ACA4A15731AF7FDC10A869FA4C698FA_il2cpp_TypeInfo_var);
+		SceneManager_LoadScene_m7237839058F581BFCA0A79BB96F6F931469E43CF(_stringLiteralEFFD35C65E33A877C6A1ED7BACA14AA546C00ECF, NULL);
+		return;
+	}
+
+IL_0025:
 	{
 		// SceneManager.LoadScene("game");
 		il2cpp_codegen_runtime_class_init_inline(SceneManager_tA0EF56A88ACA4A15731AF7FDC10A869FA4C698FA_il2cpp_TypeInfo_var);

@@ -19,6 +19,13 @@ public class MenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("game");
+        if(PlayerPrefs.GetInt("objective1") == 1 && PlayerPrefs.GetInt("objective2") == 1)
+        {
+            SceneManager.LoadScene("game1");
+        }
+        else
+        {
+            SceneManager.LoadScene("game");
+        }
     }
 }
